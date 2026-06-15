@@ -30,26 +30,75 @@ public class Controller {
 
     }
     VBox vbox = new VBox();
-
+    // --- ITEM 1: Orange ($3) ---
     HBox hbox1 = new HBox();
-    HBox hbox2 = new HBox();
-    HBox hbox3 = new HBox();
-
-    Label label_item1 = new Label("Item 1");
-    Label label_item1_price = new Label("$");
-    ImageView imageview_item_1 = new ImageView(getClass().getResource("greenapple.png").toExternalForm());
+    Label label_item1 = new Label("Orange");
+    Label label_item1_price = new Label("$3");
+    ImageView imageview_item_1 = new ImageView();
     Spinner<Integer> spinner_item1 = new Spinner<>(0, 10, 0);
 
-    @FXML
-    void initialize() {
-        //change size of imageview_item_1
-        imageview_item_1.setFitWidth(60);
-        imageview_item_1.setFitHeight(60);
+    // --- ITEM 2: Apple ($4) ---
+    HBox hbox2 = new HBox();
+    Label label_item2 = new Label("Apple");
+    Label label_item2_price = new Label("$4");
+    ImageView imageview_item_2 = new ImageView();
+    Spinner<Integer> spinner_item2 = new Spinner<>(0, 10, 0);
 
-        hbox1.getChildren().addAll(imageview_item_1, label_item1, label_item1_price, spinner_item1);
-        vbox.getChildren().addAll(hbox1);
-        vbox.getChildren().addAll(hbox2);
-        vbox.getChildren().addAll(hbox3);
+    // --- ITEM 3: Banana ($5) ---
+    HBox hbox3 = new HBox();
+    Label label_item3 = new Label("Banana");
+    Label label_item3_price = new Label("$5");
+    ImageView imageview_item_3 = new ImageView();
+    Spinner<Integer> spinner_item3 = new Spinner<>(0, 10, 0);
+
+@FXML
+    void initialize() {
+        // --- IMAGE LOADING BLOCK ---
+        loadImage(imageview_item_1, "orange.jpg"); // <--- Change these names to match your files
+        loadImage(imageview_item_2, "item3.jpeg");
+        loadImage(imageview_item_3, "item4.jpeg");
+
+        // --- LAYOUT AND STRUCTURING ---
+        vbox.setSpacing(15); // Adds vertical spacing between each row
+        vbox.getChildren().clear();
+
+        // Configure Row 1 (Banana)
+        configureRow(hbox1, imageview_item_1, label_item1, label_item1_price, spinner_item1);
+        
+        // Configure Row 2
+        configureRow(hbox2, imageview_item_2, label_item2, label_item2_price, spinner_item2);
+        
+        // Configure Row 3
+        configureRow(hbox3, imageview_item_3, label_item3, label_item3_price, spinner_item3);
+
+        // Add rows to VBox and mount to ScrollPane
+        vbox.getChildren().addAll(hbox1, hbox2, hbox3);
         scrollpane.setContent(vbox);
+    }
+
+    // Helper method to keep image configurations and sizes unified
+    private void loadImage(ImageView iv, String filename) {
+        try {
+            java.io.File file = new java.io.File(filename);
+            if (file.exists()) {
+                javafx.scene.image.Image img = new javafx.scene.image.Image(file.toURI().toString());
+                iv.setImage(img);
+            } else {
+                System.out.println("Image file not found yet: " + filename);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        iv.setFitWidth(60);
+        iv.setFitHeight(60);
+        iv.setPreserveRatio(true);
+    }
+
+    // Helper method to keep alignment and spacing matching perfectly across rows
+    private void configureRow(HBox row, ImageView iv, Label name, Label price, Spinner<Integer> spin) {
+        row.setSpacing(20);
+        row.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
+        row.getChildren().clear();
+        row.getChildren().addAll(iv, name, price, spin);
     }
 }
