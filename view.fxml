@@ -21,7 +21,7 @@
             <Font size="35.0" />
          </font>
       </Label>
-      <Label fx:id="total" layoutX="406.0" layoutY="584.0" prefHeight="43.0" prefWidth="112.0" text="Total">
+      <Label fx:id="total" layoutX="406.0" layoutY="584.0" prefHeight="43.0" prefWidth="112.0" style="-fx-border-color: green;" text="Total">
          <font>
             <Font size="18.0" />
          </font>
@@ -41,6 +41,6 @@
             <Image url="@../../Self_Project_OOP/Mini_Project/ProjectApp2/ITC.png" />
          </image>
       </ImageView>
-      <ScrollPane fx:id="scrollpane" layoutX="18.0" layoutY="145.0" onDragDetected="#on_scroll" prefHeight="419.0" prefWidth="568.0" />
+      <ScrollPane fx:id="scrollpane" layoutX="18.0" layoutY="145.0" onDragDetected="#on_scroll" prefHeight="419.0" prefWidth="568.0" style="-fx-background-color: green;" />
    </children>
 </Pane>
